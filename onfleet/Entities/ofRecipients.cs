@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 using onfleet.Infrastructure;
 using System;
-using System.Collections.Generic;
+
 
 namespace onfleet
 {
-    public class ofOrganization : ofObject
+    public class ofRecipients : ofObject
     {
         [JsonProperty("timeCreated")]
         [JsonConverter(typeof(ofDateTimeConverter))]
@@ -18,17 +18,13 @@ namespace onfleet
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("email")]
-        public string Email { get; set; }
+        [JsonProperty("phone")]
+        public string Phone { get; set; }
 
-        [JsonProperty("timezone")]
-        public string TimeZone { get; set; }
+        [JsonProperty("notes")]
+        public string Notes { get; set; }
 
-        [JsonProperty("country")]
-        public string Country { get; set; }
-
-        [JsonProperty("delegatees")]
-        public string[] Delegatees { get; set; }
-
+        [JsonProperty("skipSMSNotifications")]
+        public bool SkipSMSNotifications { get; set; }
     }
 }
