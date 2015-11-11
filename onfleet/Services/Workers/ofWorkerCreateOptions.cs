@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace onfleet
 {
@@ -12,9 +13,9 @@ namespace onfleet
         public string Phone { get; set; }
 
         [JsonProperty("teams")]
-        public string[] Teams { get; set; }
+        public List<string> Teams { get; set; }
 
         [JsonProperty("vehicle")]
-        public ofVehicle Vehicle { get; set; }
+        public ofVehicleCreateOptions Vehicle { get; set; }
     }
 }

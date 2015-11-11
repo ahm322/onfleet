@@ -2,25 +2,43 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text;
+using System.Net;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+
 
 namespace onfleet
 {
     internal static class Requestor
     {
-        public static string GetString(string url, ofRequestOptions requestOptions)
+        public static T Get<T>(string url, ofRequestOptions requestOptions, StringContent content = null)
         {
-            var wr = GetWebRequest(url, "GET", requestOptions);
+            var client = GetHttpClient(requestOptions);
 
-            return ExecuteWebRequest(wr);
+            var responseMessage = client.GetAsync(url).Result;
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var responseString = responseMessage.Content.ReadAsStringAsync().Result;
+                T obj = JsonConvert.DeserializeObject<T>(responseString);
+                return obj;
+            }
+            return default(T);
         }
 
-        public static string PostString(string url, ofRequestOptions requestOptions)
+        public static T Post<T>(string url, ofRequestOptions requestOptions, StringContent content = null)
         {
-            var wr = GetWebRequest(url, "POST", requestOptions);
+            var client = GetHttpClient(requestOptions);
 
-            return ExecuteWebRequest(wr);
+            var responseMessage = client.PostAsync(url, content).Result;
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var responseString = responseMessage.Content.ReadAsStringAsync().Result;
+                T obj = JsonConvert.DeserializeObject<T>(responseString);
+                return obj;
+            }
+            return default(T);
         }
 
         public static string Delete(string url, ofRequestOptions requestOptions)
@@ -35,6 +53,16 @@ namespace onfleet
             var wr = GetWebRequest(url, "POST", requestOptions, true);
 
             return ExecuteWebRequest(wr);
+        }
+
+        internal static HttpClient GetHttpClient(ofRequestOptions requestOptions)
+        {
+            HttpClient client = new HttpClient();
+            var byteArray = Encoding.ASCII.GetBytes(requestOptions.ApiKey);
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            return client;
         }
 
         internal static WebRequest GetWebRequest(string url, string method, ofRequestOptions requestOptions, bool useBearer = false)
@@ -86,9 +114,9 @@ namespace onfleet
                     var oferror = new ofError();
 
                     if (webRequest.RequestUri.ToString().Contains("oauth"))
-                        oferror = Mapper<ofError>.MapFromJson(ReadStream(webException.Response.GetResponseStream()));
-                    else
-                        oferror = Mapper<ofError>.MapFromJson(ReadStream(webException.Response.GetResponseStream()), "error");
+                       // oferror = Mapper<ofError>.MapFromJson(ReadStream(webException.Response.GetResponseStream()));
+                    //else
+                        //oferror = Mapper<ofError>.MapFromJson(ReadStream(webException.Response.GetResponseStream()), "error");
 
                     throw new ofException(statusCode, oferror, oferror.Message.Message);
                 }

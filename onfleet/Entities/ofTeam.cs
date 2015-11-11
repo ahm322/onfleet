@@ -1,10 +1,11 @@
 ﻿using Newtonsoft.Json;
 using onfleet.Infrastructure;
 using System;
+using System.Collections.Generic;
 
 namespace onfleet
 {
-    public class ofDestination : ofObject
+    public class ofTeam :ofObject
     {
         [JsonProperty("timeCreated")]
         [JsonConverter(typeof(ofDateTimeConverter))]
@@ -14,16 +15,13 @@ namespace onfleet
         [JsonConverter(typeof(ofDateTimeConverter))]
         public DateTime LastModified { get; set; }
 
-        [JsonProperty("location")]
-        public double[] Location { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
-        [JsonProperty("address")]
-        public ofAddress Address { set; get; }
+        [JsonProperty("workers")]
+        public List<string> Workers { get; set; }
 
-        [JsonProperty("notes")]
-        public string Notes { get; set; }
-
-        [JsonProperty("tasks")]
-        public string[] Tasks { get; set; }
+        [JsonProperty("managers")]
+        public List<string> Managers { get; set; }
     }
 }

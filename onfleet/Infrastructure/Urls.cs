@@ -29,6 +29,11 @@ namespace onfleet
             get { return BaseUrl + "/tasks"; }
         }
 
+        public static string Teams
+        {
+            get { return BaseUrl + "/teams"; }
+        }
+
         private static string BaseUrl
         {
             get { return "https://onfleet.com/api/v2"; }

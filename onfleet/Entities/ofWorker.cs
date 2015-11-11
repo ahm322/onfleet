@@ -25,14 +25,13 @@ namespace onfleet
         public string Phone { get; set; }
 
         [JsonProperty("vehicle")]
-        [JsonConverter(typeof(ofVehicle))]
         public ofVehicle Vehicle { get; set; }
 
         [JsonProperty("activeTask")]
         public string ActiveTaskId { get; set; }
 
         [JsonProperty("tasks")]
-        public string[] Tasks { get; set; }
+        public List<string> Tasks { get; set; }
 
         [JsonProperty("onDuty")]
         public bool OnDuty { get; set; }
@@ -42,15 +41,15 @@ namespace onfleet
 
         [JsonProperty("timeLastSeen")]
         [JsonConverter(typeof(ofDateTimeConverter))]
-        public DateTime TimeLastSeen { get; set; }
+        public DateTime? TimeLastSeen { get; set; }
 
         [JsonProperty("delayTime")]
-        public TimeSpan DelayTime { get; set; }
+        public TimeSpan? DelayTime { get; set; }
 
         [JsonProperty("teams")]
         public string[] Teams { get; set; }
 
         [JsonProperty("metadata")]
-        public Dictionary<string, string> Metadata { get; set; }
+        public List<ofMetaData> Metadata { get; set; }
     }
 }

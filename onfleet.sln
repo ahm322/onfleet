@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.40418.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "onfleet", "onfleet\onfleet.csproj", "{758511B2-1184-4B6B-B2D1-2D57A2B198DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "onfleetTest", "onfleetTest\onfleetTest.csproj", "{9831257C-BD12-4A3A-A52F-130A99A2A8A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{758511B2-1184-4B6B-B2D1-2D57A2B198DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{758511B2-1184-4B6B-B2D1-2D57A2B198DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{758511B2-1184-4B6B-B2D1-2D57A2B198DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9831257C-BD12-4A3A-A52F-130A99A2A8A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9831257C-BD12-4A3A-A52F-130A99A2A8A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9831257C-BD12-4A3A-A52F-130A99A2A8A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9831257C-BD12-4A3A-A52F-130A99A2A8A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
