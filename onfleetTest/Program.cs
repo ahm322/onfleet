@@ -22,7 +22,7 @@ namespace onfleetTest
             //    teamIds.Add(item.Id);
             //}
 
-           ofTaskService taskService = new ofTaskService();
+            ofTaskService taskService = new ofTaskService("37bef89ed1014c9a6dd60956a17fa996");
             //var tasks = taskService.List();
             //Console.WriteLine(" ========Tasks======= ");
             //foreach (var item in tasks)
@@ -45,7 +45,7 @@ namespace onfleetTest
             //var rec = reService.FindByPhone("07445544401");
 
 
-            var orgService = new ofOrgnizationService();
+            var orgService = new ofOrgnizationService("37bef89ed1014c9a6dd60956a17fa996");
             var org = orgService.Get();
 
             ofTaskCreateOptions taskCreateOptions = new ofTaskCreateOptions
@@ -85,12 +85,38 @@ namespace onfleetTest
             {
                 Console.WriteLine(string.Format("name: {0} - id: {1}", item.Name, item.Id));
             }
-            var c = Console.ReadLine();
-
-            //ofRequestOptions opt = new ofRequestOptions { ApiKey =  };
-
-            taskService.CreateWithDestinationAndWorker(taskCreateOptions,"34 Larden Road, W37SU", c);
             
+
+            //taskService.CreateWithDestinationAndWorker(taskCreateOptions,"34 Larden Road, W37SU", c);
+            
+            ofDestinationService destinationService = new ofDestinationService("");
+
+            var pickupAddress = destinationService.Create(new ofDestinationCreateOptions{
+                Address= new ofAddress{ Unparsed="W36UN"}
+            });
+
+            var deliveryAddress = destinationService.Create(new ofDestinationCreateOptions{
+                Address= new ofAddress{ Unparsed="W37SU"}
+            });
+
+            ofTaskCreateOptions pickupCreateOptions = new ofTaskCreateOptions
+            {
+                Executor = org.Id,
+                Merchant = org.Id,
+                DestinationId = pickupAddress.Id,
+                PickupTask = true
+            };
+            ofTaskCreateOptions deliveryCreateOptions = new ofTaskCreateOptions
+            {
+                Executor = org.Id,
+                Merchant = org.Id,
+                DestinationId = deliveryAddress.Id,
+                PickupTask = false
+            };
+
+         var task =   taskService.CreatePickupAndDelivery(pickupCreateOptions, deliveryCreateOptions);
+         Console.WriteLine("new task created: " + task.Id + " with pickup task: " + task.Dependencies.First());
+         var c = Console.ReadLine();
         }
     }
 }
