@@ -5,7 +5,7 @@ using System;
 
 namespace onfleet
 {
-    public class ofRecipients : ofObject
+    public class ofRecipient : ofObject
     {
         [JsonProperty("timeCreated")]
         [JsonConverter(typeof(ofDateTimeConverter))]
@@ -26,5 +26,8 @@ namespace onfleet
 
         [JsonProperty("skipSMSNotifications")]
         public bool SkipSMSNotifications { get; set; }
+
+        [JsonProperty("skipPhoneNumberValidation")]
+        public bool SkipPhoneNumberValidation { get; set; }
     }
 }

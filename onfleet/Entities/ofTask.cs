@@ -8,11 +8,6 @@ namespace onfleet
 {
     public class ofTask : ofObject
     {
-        public ofTask()
-        {
-
-        }
-
         [JsonProperty("timeCreated")]
         [JsonConverter(typeof(ofDateTimeConverter))]
         public DateTime Created { get; set; }
@@ -43,7 +38,7 @@ namespace onfleet
         public ofDestination Destination { get; set; }
 
         [JsonProperty("recipients")]
-        public List<ofRecipients> Recipients { get; set; }
+        public List<ofRecipient> Recipients { get; set; }
 
         [JsonProperty("state")]
         public TaskState State { get; set; }

@@ -70,6 +70,7 @@
     <Compile Include="Entities\ofTeam.cs" />
     <Compile Include="Entities\ofVehicle.cs" />
     <Compile Include="Entities\ofWorker.cs" />
+    <Compile Include="Extensions\ofTaskExtensions.cs" />
     <Compile Include="Infrastructure\EpochTime.cs" />
     <Compile Include="Infrastructure\ofConfiguration.cs" />
     <Compile Include="Infrastructure\ofDateTimeConverter.cs" />
@@ -81,6 +82,9 @@
     <Compile Include="Services\Destinations\ofDestinationService.cs" />
     <Compile Include="Services\ofRequestOptions.cs" />
     <Compile Include="Services\ofService.cs" />
+    <Compile Include="Services\Orgnizations\ofOrgnizationService.cs" />
+    <Compile Include="Services\Recipients\ofRecipientsCreateOptions.cs" />
+    <Compile Include="Services\Recipients\ofRecipientService.cs" />
     <Compile Include="Services\Tasks\ofTaskCreateOptions.cs" />
     <Compile Include="Services\Tasks\ofTaskService.cs" />
     <Compile Include="Services\Teams\ofTeamService.cs" />

@@ -10,7 +10,6 @@ namespace onfleet
         public string ErrorCode { get; set; }
 
         [JsonProperty("message")]
-        [JsonConverter(typeof(ofErrorMessage))]
         public ofErrorMessage Message { get; set; }
 
     }

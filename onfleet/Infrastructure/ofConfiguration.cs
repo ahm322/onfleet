@@ -6,7 +6,7 @@ namespace onfleet
     public static class ofConfiguration
     {
         private static string _apiKey;
-        internal const string SupportedApiVersion = "v1";
+        internal const string SupportedApiVersion = "v2";
 
         static ofConfiguration()
         {

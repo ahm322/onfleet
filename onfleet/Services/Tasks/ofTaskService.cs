@@ -35,5 +35,6 @@ namespace onfleet
             var task = Requestor.Get<ofTask>(string.Format("{0}/{1}", Urls.Tasks, taskId), requestOptions);
             return task;
         }
+
     }
 }

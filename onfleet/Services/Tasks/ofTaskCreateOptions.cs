@@ -7,6 +7,11 @@ namespace onfleet
 {
     public class ofTaskCreateOptions
     {
+        public ofTaskCreateOptions()
+        {
+            Recipients = new List<string> { "" };
+        }
+
         [JsonProperty("merchant")]
         public string Merchant { get; set; }
 

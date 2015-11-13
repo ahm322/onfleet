@@ -18,7 +18,7 @@ namespace onfleet
         public string Request { get; set; }
 
         [JsonProperty("cause")]
-        public string Cause { get; set; }
+        public object Cause { get; set; }
 
     }
 }

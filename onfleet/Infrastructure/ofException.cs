@@ -7,17 +7,24 @@ namespace onfleet
     public class ofException : ApplicationException
     {
         public HttpStatusCode HttpStatusCode { get; set; }
-        public ofError ofError { get; set; }
+        public ofError Error { get; set; }
 
         public ofException()
         {
         }
 
-        public ofException(HttpStatusCode httpStatusCode, ofError oferror, string message)
+        public ofException(HttpStatusCode httpStatusCode, ofError error, string message)
             : base(message)
         {
             HttpStatusCode = httpStatusCode;
-            ofError = oferror;
+            Error = error;
+        }
+
+        public ofException(HttpStatusCode httpStatusCode, ofError oferror)
+            : base(oferror.Message.Message)
+        {
+            HttpStatusCode = httpStatusCode;
+            Error = oferror;
         }
     }
 }

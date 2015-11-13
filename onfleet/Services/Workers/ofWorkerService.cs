@@ -16,7 +16,7 @@ namespace onfleet
         {
             requestOptions = SetupRequestOptions(requestOptions);
 
-            string serilizedObj = JsonConvert.SerializeObject(createOptions).ToString();
+            string serilizedObj = JsonConvert.SerializeObject(createOptions, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }).ToString();
             var PostData = new StringContent(serilizedObj, Encoding.UTF8, "application/json");
             var worker = Requestor.Post<ofWorker>(Urls.Workers, requestOptions, PostData);
             return worker;
@@ -30,37 +30,31 @@ namespace onfleet
             return worker;
         }
 
-        //public virtual ofWorker Update(string workerId, ofWorkerUpdateOptions updateOptions, ofRequestOptions requestOptions = null)
-        //{
-        //    requestOptions = SetupRequestOptions(requestOptions);
+        public virtual ofWorker Update(string workerId, ofWorkerUpdateOptions updateOptions, ofRequestOptions requestOptions = null)
+        {
+            requestOptions = SetupRequestOptions(requestOptions);
 
-        //    var url = string.Format("{0}/{1}", Urls.Workers, workerId);
-        //    url = this.ApplyAllParameters(updateOptions, url, false);
+            string serilizedObj = JsonConvert.SerializeObject(updateOptions, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }).ToString();
+            var PostData = new StringContent(serilizedObj, Encoding.UTF8, "application/json");
+            var worker = Requestor.Put<ofWorker>(string.Format("{0}/{1}", Urls.Workers, workerId), requestOptions, PostData);
+            return worker;
+        }
 
-        //    var response = Requestor.PostString(url, requestOptions);
+        public virtual void Delete(string workerId, ofRequestOptions requestOptions = null)
+        {
+            requestOptions = SetupRequestOptions(requestOptions);
 
-        //    return Mapper<ofWorker>.MapFromJson(response);
-        //}
+            var url = string.Format("{0}/{1}", Urls.Workers, workerId);
 
-        //public virtual void Delete(string workerId, ofRequestOptions requestOptions = null)
-        //{
-        //    requestOptions = SetupRequestOptions(requestOptions);
+            Requestor.Delete(url, requestOptions);
+        }
 
-        //    var url = string.Format("{0}/{1}", Urls.Workers, workerId);
+        public virtual IEnumerable<ofWorker> List(ofRequestOptions requestOptions = null)
+        {
+            requestOptions = SetupRequestOptions(requestOptions);
 
-        //    Requestor.Delete(url, requestOptions);
-        //}
-
-        //public virtual IEnumerable<ofWorker> List(ofRequestOptions requestOptions = null)
-        //{
-        //    requestOptions = SetupRequestOptions(requestOptions);
-
-        //    var url = Urls.Workers;
-        //    url = this.ApplyAllParameters(null, url, true);
-
-        //    var response = Requestor.GetString(url, requestOptions);
-
-        //    return Mapper<ofWorker>.MapCollectionFromJson(response);
-        //}
+            var workers = Requestor.Get<List<ofWorker>>(Urls.Workers, requestOptions);
+            return workers;
+        }
     }
 }
