@@ -59,8 +59,8 @@ namespace onfleetTest
             //var task = taskService.Create(taskCreateOptions);
             //Console.WriteLine(" New task created: " + task.Id);
 
-            
-            ofWorkerService ws = new ofWorkerService();
+
+            ofWorkerService ws = new ofWorkerService("37bef89ed1014c9a6dd60956a17fa996");
             //ofWorker worker = new ofWorker();
             //ofWorkerCreateOptions createOptions = new ofWorkerCreateOptions();
             //createOptions.Name = "Ahmed";
@@ -88,15 +88,15 @@ namespace onfleetTest
             
 
             //taskService.CreateWithDestinationAndWorker(taskCreateOptions,"34 Larden Road, W37SU", c);
-            
-            ofDestinationService destinationService = new ofDestinationService("");
+
+            ofDestinationService destinationService = new ofDestinationService("-your api key-");
 
             var pickupAddress = destinationService.Create(new ofDestinationCreateOptions{
-                Address= new ofAddress{ Unparsed="W36UN"}
+                Address = new ofAddress { Unparsed = "118 The Vale, London W3 7JT" }
             });
 
             var deliveryAddress = destinationService.Create(new ofDestinationCreateOptions{
-                Address= new ofAddress{ Unparsed="W37SU"}
+                Address = new ofAddress { Unparsed = "34 Larden Road, W3 7SU" }
             });
 
             ofTaskCreateOptions pickupCreateOptions = new ofTaskCreateOptions
