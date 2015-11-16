@@ -12,7 +12,7 @@ namespace onfleetTest
         static void Main(string[] args)
         {
             //ofTeamService ts = new ofTeamService();
-            
+
             //var teams = ts.List();
             //var teamIds = new List<string>();
             //Console.WriteLine(" ========Teams======= ");
@@ -85,17 +85,18 @@ namespace onfleetTest
             {
                 Console.WriteLine(string.Format("name: {0} - id: {1}", item.Name, item.Id));
             }
-            
 
             //taskService.CreateWithDestinationAndWorker(taskCreateOptions,"34 Larden Road, W37SU", c);
 
             ofDestinationService destinationService = new ofDestinationService("37bef89ed1014c9a6dd60956a17fa996");
 
-            var pickupAddress = destinationService.Create(new ofDestinationCreateOptions{
-                Address = new ofAddress { Unparsed = "118 The Vale, London W3 7JT" }
+            var pickupAddress = destinationService.Create(new ofDestinationCreateOptions
+            {
+                Address = new ofAddress { Unparsed = "sand flames, 1 Holbrook House, Victoria Road, LONDON, W3 6UN" }
             });
 
-            var deliveryAddress = destinationService.Create(new ofDestinationCreateOptions{
+            var deliveryAddress = destinationService.Create(new ofDestinationCreateOptions
+            {
                 Address = new ofAddress { Unparsed = "34 Larden Road, W3 7SU" }
             });
 
@@ -114,9 +115,9 @@ namespace onfleetTest
                 PickupTask = false
             };
 
-         var task =   taskService.CreatePickupAndDelivery(pickupCreateOptions, deliveryCreateOptions);
-         Console.WriteLine("new task created: " + task.Id + " with pickup task: " + task.Dependencies.First());
-         var c = Console.ReadLine();
+            var task = taskService.CreatePickupAndDelivery(pickupCreateOptions, deliveryCreateOptions);
+            Console.WriteLine("new task created: " + task.Id + " with pickup task: " + task.Dependencies.First());
+            var c = Console.ReadLine();
         }
     }
 }
