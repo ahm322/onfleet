@@ -55,11 +55,17 @@ namespace onfleet
 
         }
 
-        public static ofWorker AssignToWorker(this ofTaskService taskService, string taskId, string workerId, ofRequestOptions requestOptions = null)
+        public static ofWorker AssignToWorker(this ofTaskService taskService, string taskId, string workerId,bool assignTaskDependencies = true, ofRequestOptions requestOptions = null)
         {
             var workerService = string.IsNullOrEmpty(taskService.ApiKey) ? new ofWorkerService() : new ofWorkerService(taskService.ApiKey);
-
-            ofWorkerUpdateOptions updateoptions = new ofWorkerUpdateOptions { Tasks = new List<string> { taskId } };
+            var tasksIds = new List<string>();
+            if (assignTaskDependencies == true)
+            {
+                var task = taskService.Get(taskId, requestOptions);
+                tasksIds.AddRange(task.Dependencies);
+            }
+            tasksIds.Add(taskId);
+            ofWorkerUpdateOptions updateoptions = new ofWorkerUpdateOptions { Tasks = tasksIds };
 
             var worker = workerService.Update(workerId, updateoptions, requestOptions);
 

@@ -41,7 +41,7 @@ namespace onfleet
         public List<string> Dependencies { get; set; }
 
         [JsonProperty("recipients")]
-        public List<string> Recipients { get; set; }
+        public List<ofRecipient> Recipients { get; set; }
 
         [JsonProperty("state")]
         public TaskState State { get; set; }

@@ -86,13 +86,32 @@ namespace onfleetTest
                 Console.WriteLine(string.Format("name: {0} - id: {1}", item.Name, item.Id));
             }
 
+            ofRecipientService recipientService = new ofRecipientService("37bef89ed1014c9a6dd60956a17fa996");
+
+
             //taskService.CreateWithDestinationAndWorker(taskCreateOptions,"34 Larden Road, W37SU", c);
 
             ofDestinationService destinationService = new ofDestinationService("37bef89ed1014c9a6dd60956a17fa996");
 
             var pickupAddress = destinationService.Create(new ofDestinationCreateOptions
             {
-                Address = new ofAddress { Unparsed = "sand flames, 1 Holbrook House, Victoria Road, LONDON, W3 6UN" }
+                Address = new ofAddress { Name = "Sand Flames", Number = "1", Street = "Victoria Road", City = "LONDON", PostalCode = "W3 6UN", Country = "United Kingdom" },
+                Location = new double[] { -0.2604646, 51.5229645 }
+            });
+            //ofRecipientService recipientService = new ofRecipientService("37bef89ed1014c9a6dd60956a17fa996");
+            var recipientPickup = recipientService.FindOrCreate("+442089932473", new ofRecipientsCreateOptions
+            {
+                Name = "Sand Flames",
+                Phone = "+442089932473",
+                SkipPhoneNumberValidation = true,
+                SkipSMSNotifications = true
+            });
+            var recipientDelivery = recipientService.FindOrCreate("+447445544401", new ofRecipientsCreateOptions
+            {
+                Name = "Ahmed Abdulla",
+                Phone = "+447445544401",
+                SkipPhoneNumberValidation = true,
+                SkipSMSNotifications = true
             });
 
             var deliveryAddress = destinationService.Create(new ofDestinationCreateOptions
@@ -100,11 +119,15 @@ namespace onfleetTest
                 Address = new ofAddress { Unparsed = "34 Larden Road, W3 7SU" }
             });
 
+
+
             ofTaskCreateOptions pickupCreateOptions = new ofTaskCreateOptions
             {
                 Executor = org.Id,
                 Merchant = org.Id,
                 DestinationId = pickupAddress.Id,
+                Recipients = new List<string> { recipientPickup.Id },
+                Notes = "Order #2342",
                 PickupTask = true
             };
             ofTaskCreateOptions deliveryCreateOptions = new ofTaskCreateOptions
@@ -112,12 +135,16 @@ namespace onfleetTest
                 Executor = org.Id,
                 Merchant = org.Id,
                 DestinationId = deliveryAddress.Id,
+                Recipients = new List<string> { recipientDelivery.Id },
+                Notes = "Order #2342",
                 PickupTask = false
             };
 
             var task = taskService.CreatePickupAndDelivery(pickupCreateOptions, deliveryCreateOptions);
             Console.WriteLine("new task created: " + task.Id + " with pickup task: " + task.Dependencies.First());
             var c = Console.ReadLine();
+            var worker = taskService.AssignToWorker(task.Id, workers.First().Id);
+            var d = Console.ReadLine();
         }
     }
 }

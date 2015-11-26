@@ -6,6 +6,9 @@ namespace onfleet
 {
     public class ofAddress : ofObject
     {
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
         [JsonProperty("apartment")]
         public string Apartment { get; set; }
 

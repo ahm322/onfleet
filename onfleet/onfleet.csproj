@@ -70,6 +70,7 @@
     <Compile Include="Entities\ofTeam.cs" />
     <Compile Include="Entities\ofVehicle.cs" />
     <Compile Include="Entities\ofWorker.cs" />
+    <Compile Include="Extensions\ofRecipientExtentions.cs" />
     <Compile Include="Extensions\ofTaskExtensions.cs" />
     <Compile Include="Infrastructure\EpochTime.cs" />
     <Compile Include="Infrastructure\ofConfiguration.cs" />
