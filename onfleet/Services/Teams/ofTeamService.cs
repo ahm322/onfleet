@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace onfleet
 {
@@ -15,5 +14,11 @@ namespace onfleet
             return response;
         }
 
+        public virtual ofTeam Get(string id, ofRequestOptions requestOptions = null)
+        {
+            requestOptions = SetupRequestOptions(requestOptions);
+
+            return Requestor.Get<ofTeam>(string.Format("{0}/{1}", Urls.Teams, id), requestOptions);
+        }
     }
 }

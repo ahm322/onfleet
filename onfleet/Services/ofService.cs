@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace onfleet
+﻿namespace onfleet
 {
     public class ofService
     {
-          public string ApiKey { get; set; }
+        public string ApiKey { get; set; }
 
         protected ofService(string apiKey)
         {
@@ -13,9 +11,9 @@ namespace onfleet
 
         protected ofRequestOptions SetupRequestOptions(ofRequestOptions requestOptions)
         {
-            if(requestOptions == null) requestOptions = new ofRequestOptions();
+            if (requestOptions == null) requestOptions = new ofRequestOptions();
 
-            if (!String.IsNullOrEmpty(ApiKey))
+            if (string.IsNullOrEmpty(requestOptions.ApiKey))
                 requestOptions.ApiKey = ApiKey;
 
             return requestOptions;
