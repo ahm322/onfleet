@@ -22,9 +22,10 @@ namespace onfleet
         {
             requestOptions = SetupRequestOptions(requestOptions);
 
-            string serilizedObj = JsonConvert.SerializeObject(createOptions, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }).ToString();
-            var PostData = new StringContent(serilizedObj, Encoding.UTF8, "application/json");
-            var task = Requestor.Post<ofTask>(Urls.Tasks, requestOptions, PostData);
+            var serilizedObj = JsonConvert.SerializeObject(createOptions,
+                new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
+            var postData = new StringContent(serilizedObj, Encoding.UTF8, "application/json");
+            var task = Requestor.Post<ofTask>(Urls.Tasks, requestOptions, postData);
             return task;
         }
 
@@ -36,5 +37,13 @@ namespace onfleet
             return task;
         }
 
+        public ofTask Update(string taskId, ofTaskCreateOptions options, ofRequestOptions requestOptions)
+        {
+            requestOptions = SetupRequestOptions(requestOptions);
+            var serilizedObj = JsonConvert.SerializeObject(options, new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
+            var postData = new StringContent(serilizedObj, Encoding.UTF8, "application/json");
+
+            return Requestor.Put<ofTask>(string.Format("{0}/{1}", Urls.Tasks, taskId), requestOptions, postData);
+        }
     }
 }

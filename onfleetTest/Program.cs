@@ -45,7 +45,7 @@ namespace onfleetTest
             //var rec = reService.FindByPhone("07445544401");
 
 
-            var orgService = new ofOrgnizationService("37bef89ed1014c9a6dd60956a17fa996");
+            var orgService = new ofOrganizationService("37bef89ed1014c9a6dd60956a17fa996");
             var org = orgService.Get();
 
             ofTaskCreateOptions taskCreateOptions = new ofTaskCreateOptions

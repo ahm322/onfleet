@@ -9,6 +9,11 @@ namespace onfleet
             get { return BaseUrl + "/organization"; }
         }
 
+        public static string Organizations
+        {
+            get { return BaseUrl + "/organizations"; }
+        }
+
         public static string Workers
         {
             get { return BaseUrl + "/workers"; }
