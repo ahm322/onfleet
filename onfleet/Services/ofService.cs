@@ -2,7 +2,7 @@
 {
     public class ofService
     {
-        public string ApiKey { get; set; }
+          public string ApiKey { get; set; }
 
         protected ofService(string apiKey)
         {
@@ -11,7 +11,7 @@
 
         protected ofRequestOptions SetupRequestOptions(ofRequestOptions requestOptions)
         {
-            if (requestOptions == null) requestOptions = new ofRequestOptions();
+            if(requestOptions == null) requestOptions = new ofRequestOptions();
 
             if (string.IsNullOrEmpty(requestOptions.ApiKey))
                 requestOptions.ApiKey = ApiKey;

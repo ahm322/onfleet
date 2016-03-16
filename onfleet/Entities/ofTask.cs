@@ -59,5 +59,8 @@ namespace onfleet
 
         [JsonProperty("notes")]
         public string Notes { get; set; }
+
+        [JsonProperty("trackingURL")]
+        public string TrackingUrl { get; set; }
     }
 }

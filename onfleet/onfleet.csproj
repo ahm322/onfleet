@@ -83,7 +83,7 @@
     <Compile Include="Services\Destinations\ofDestinationService.cs" />
     <Compile Include="Services\ofRequestOptions.cs" />
     <Compile Include="Services\ofService.cs" />
-    <Compile Include="Services\Orgnizations\ofOrgnizationService.cs" />
+    <Compile Include="Services\Orgnizations\ofOrganizationService.cs" />
     <Compile Include="Services\Recipients\ofRecipientsCreateOptions.cs" />
     <Compile Include="Services\Recipients\ofRecipientService.cs" />
     <Compile Include="Services\Tasks\ofTaskCreateOptions.cs" />
